@@ -49,49 +49,34 @@ const showItemsStore = (state)=>{ return {information:state.information}}
 export default connect(showItemsStore)(DisplayUser);*/
 
 
-import React from 'react'
+import React from 'react';
 import { connect } from 'react-redux';
-import { Link , Route }  from 'react-router-dom';
-import DisplayContent from './DisplayContent';
+import { Link } from 'react-router-dom';
 
 
-class DisplayUser extends React.Component{
-    
-    state = {
-        informationUser:[]
-    }
-componentDidMount = ()=>{
+class DisplayUser extends React.Component {
+      state ={information: []}
 
-    this.setState({informationUser:this.props.information} , ()=>{
-      return this.state.informationUser;
-    });
+componentDidMount(){
 
+this.setState({information:this.props.information} , ()=>{
+    return this.state.information;
+})
 }
-
-    render(){
-return(
-<div>{this.state.informationUser.map( user =>{
-
-return(
-    <div key={user.id}>
-        <h1><Link to={`/user/${user.id}`}>{user.name}</Link></h1>
-        <h4>{user.country}</h4>
-        </div>
-)//end of the return for the map
-}//end of the map function
-)//end the first return
-/*end of the first div*/}
-<Route exact path="/user/:id" component = {DisplayContent} /> 
-</div>
-)
-}
-}
-
+render(){
+    return(
+        <div>{this.state.information.map( user =>{
+           return(
+               <div key={user.id}>
+                  <Link to={`/${user.name}`} > <h1>{user.name}</h1> </Link>
+               </div>
+           ) 
+        })} </div>
+    ) 
+    //end of the return 
+}//end of the render
+}//end of the class component
 const setPropsToMap = (state)=>{
-
-    return{
-        information:state.information
-    }
-}
-
+return {information:state}//end of the return
+}//end of the function setPropsToMap
 export default connect(setPropsToMap)(DisplayUser);

@@ -1,40 +1,32 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+
 class DisplayContent extends React.Component{
+   state = {
+       users:[]
+   }
 
-    state = {
+  componentDidMount() {
 
-        user:[]
-    }
+       this.props.userContent.filter( element =>{
+           return this.setState({users: element.name === this.props.match.params.user} , ()=>{return this.state.users})
+       })
 
-    componentDidMount = ()=>{
+  }
 
-        this.setState({user:this.props.information} , ()=>{
-            return this.state.user
-        })
-       
-    }
+    render(){
+        console.log(this.props.userContent)
+        console.log(this.state.users)
+    return(
+        <div>{}</div>
+    )//end of the return=
+}//end of the render
+}//end of the class
 
-render(){
-    
-    return(<div>{
-         this.state.user.map (nuser =>{
-                return(
-                    <div id={nuser.id}>
-                        <h1>{nuser.name}</h1>
-                    </div>
-                )
-            
-         })
-        }</div>)
+const mapStateToProps = (state , ownProps)=>{
+    const user  = ownProps.match.params.user; 
+    return { userContent: state }//end of the return 
+
 }
-}
-
-const setMapValue = (state) =>{
-
-    return{
-           information: state.information.id === 1
-    }
-}
-export default connect(setMapValue)(DisplayContent);
+export default connect(mapStateToProps)(DisplayContent);
