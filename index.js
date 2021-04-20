@@ -19,7 +19,7 @@ const store = createStore(rootReducer); //create our variable store and assign c
 //provide the store to the app component
 ReactDOM.render(<Provider store={store}> <AppComponent /> </Provider> , document.querySelector('#root')*/
 
-
+/*
 import React from 'react';
 import ReactDOM from 'react-dom';
 import AppComponent from './App';
@@ -31,4 +31,15 @@ const store = createStore(rootReducer);
 
 ReactDOM.render(
 <Provider store={store}><AppComponent /></Provider>, document.querySelector('#root')
-)
+)*/
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import AppComponent from './App';
+import rootReducer from './reducers/rootReducer';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+
+
+const store = createStore(rootReducer);
+ReactDOM.render(<Provider store={store} > <AppComponent /> </Provider> , document.querySelector('#root'));
